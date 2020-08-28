@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 const Statistic = ({value, text, suffix}) => {
     return (
         <>
-            <p>{text} {value}{suffix}</p>
+            <th>{text}</th>
+            <td>{value}{suffix}</td>
         </>
     )
 }
@@ -20,11 +21,21 @@ const Statistics = (props) => {
 
     return (
         <>
-            <Statistic text="good" value={good}></Statistic>
-            <Statistic text="neutral" value={neutral}></Statistic>
-            <Statistic text="bad" value={bad}></Statistic>
-            <Statistic text="average" value={(good-bad)/clicks}></Statistic>
-            <Statistic text="positive" value={good/clicks} suffix="%"></Statistic>
+        <table>
+            <tbody>
+                <tr><Statistic text="good" value={good}></Statistic></tr>
+                <tr><Statistic text="neutral" value={neutral}></Statistic></tr>
+                <tr><Statistic text="bad" value={bad}></Statistic></tr>
+                <tr><Statistic text="average" 
+                    value={Number.parseFloat((good-bad)/clicks).toFixed(1)}>
+                    </Statistic></tr>
+                <tr>
+                    <Statistic text="positive" 
+                    value={Number.parseFloat(good/clicks*100).toFixed(1)} suffix="%">
+                    </Statistic>
+                </tr>
+            </tbody>
+        </table>
         </>
     )
 }
