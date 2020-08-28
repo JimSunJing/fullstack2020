@@ -1,24 +1,37 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
-const Statistic = ({good, neutral, bad, clicks}) => {
-
-    if (clicks === 0){
-        return(
-            <>
-                <div>No feedback given</div>
-            </>
-        )
-    }
-    
+const Statistic = ({value, text, suffix}) => {
     return (
         <>
-            <p>good: {good}</p>
-            <p>neutral: {neutral}</p>
-            <p>bad: {bad}</p>
-            <p>average: {(good-bad)/clicks}</p>
-            <p>positive: {good/clicks}%</p>
+            <p>{text} {value}{suffix}</p>
         </>
+    )
+}
+
+const Statistics = (props) => {
+    const {clicks, good, neutral, bad} = props
+
+    if (clicks === 0){
+        return (
+            <p>No feedback given</p>
+        )
+    }
+
+    return (
+        <>
+            <Statistic text="good" value={good}></Statistic>
+            <Statistic text="neutral" value={neutral}></Statistic>
+            <Statistic text="bad" value={bad}></Statistic>
+            <Statistic text="average" value={(good-bad)/clicks}></Statistic>
+            <Statistic text="positive" value={good/clicks} suffix="%"></Statistic>
+        </>
+    )
+}
+
+const Button = ({func, text}) => {
+    return (
+        <button onClick={func}>{text}</button>
     )
 }
 
@@ -38,11 +51,13 @@ const App = () => {
     return (
         <>
             <h1>Unicafe give feedback</h1>
-            <button onClick={plus1(good, setGood)}>good</button>
-            <button onClick={plus1(neutral, setNeutral)}>neutal</button>
-            <button onClick={plus1(bad, setBad)}>bad</button>
+            <Button func={plus1(good, setGood)} text="good"></Button>
+            <Button func={plus1(neutral, setNeutral)} text="neutal"></Button>
+            <Button func={plus1(bad, setBad)} text="bad"></Button>
+
             <h1>statistic</h1>
-            <Statistic good={good} neutral={neutral} bad={bad} clicks={clicks}></Statistic>
+            <Statistics good={good} bad={bad}
+                neutral={neutral} clicks={clicks}></Statistics>
         </>
     )
 }
