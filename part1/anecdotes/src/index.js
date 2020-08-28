@@ -1,9 +1,21 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 
+const Anecdote = (props) => {
+    const {anecdote, vcount} = props
+    return (
+        <>
+            <div>{anecdote}</div>
+            <p>has {vcount} votes</p>
+        </>
+    )
+}
+
 const App = (props) => {
     const [selected, setSelected] = useState(0)
     const [votes, setVotes] = useState(new Array(props.anecdotes.length).fill(0))
+    // top Vote Status [position, votes]
+    const [topVote, setTopVote] = useState([0, 0])
 
     const genRandomInt = (len) => {
         // generate random Integer
@@ -12,25 +24,30 @@ const App = (props) => {
         return n
     }
 
-    const addVote = (i) => {
+    const addVote = () => {
         setVotes(votes.map(
             (val, index) => {
-                return index === i ? val+1 : val
+                return index === selected ? val+1 : val
             }
         ))
+        // if exceed the top vote need to change the top voe
+        if (votes[selected]+1 >= topVote[1]){
+            setTopVote([selected, votes[selected]+1])
+        }
     }
 
     return (
         <>
-            <div>
-                {props.anecdotes[selected]}
-            </div>
-            <p>has {votes[selected]} votes</p>
-            <button onClick={() => addVote(selected)}>vote for this one</button>
-            <button onClick={() => 
-                setSelected(genRandomInt(props.anecdotes.length))}>
-                    next anecdote
+            <h1>Anecdote of the day</h1>
+            <Anecdote anecdote={props.anecdotes[selected]} vcount={votes[selected]} />
+
+            <button onClick={() => addVote()}>vote for this one</button>
+            <button onClick={() => setSelected(
+                genRandomInt(props.anecdotes.length))}> next anecdote
             </button>
+
+            <h1>Anecdote with most vote</h1>
+            <Anecdote anecdote={props.anecdotes[topVote[0]]} vcount={topVote[1]} />
         </>
 
     )
