@@ -37,6 +37,18 @@ const Part = (props) => {
     )
 }
 
+// exercise 2.1
+const Course = ({course}) => {
+    return (
+        <>
+            <Header course={course.name} />
+            <Content parts={course.parts} />
+            <Total parts={course.parts} />
+        </>
+    )
+}
+
+
 const App = () => {
   // exercise 1.3: send in objects
   // exercise 1.4: send in a array
@@ -59,9 +71,7 @@ const App = () => {
   }
   return (
     <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+        <Course course={course}></Course>
     </div>
   )
 }
