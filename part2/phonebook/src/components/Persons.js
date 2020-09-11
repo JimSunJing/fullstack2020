@@ -6,7 +6,7 @@ const Persons = ({persons,searchKey}) => {
             {persons.map(p => {
                 if (p.name.toLowerCase().indexOf(searchKey) !== -1){
                     return (<div key={p.name}>{p.name} {p.number} </div>)
-                } else return 
+                } else return null
             })}
         </div>
     );

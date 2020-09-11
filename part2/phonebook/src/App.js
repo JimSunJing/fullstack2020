@@ -17,7 +17,7 @@ const App = (props) => {
                 console.log('promise fulfilled')
                 setPersons(response.data)
             })
-    })
+    },[])
 
     return (
         <>
