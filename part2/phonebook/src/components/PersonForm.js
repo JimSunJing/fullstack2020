@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 const PersonForm = (props) => {
 
@@ -18,10 +19,6 @@ const PersonForm = (props) => {
     
     const addName = (event) => {
         event.preventDefault()
-        const person2add = {
-            name: newName,
-            number: number
-        }
         // check if name already excist
         // console.log('find:',persons.find(p => p.name === newName))
         if (persons.find(p => p.name === newName) !== undefined){
@@ -36,7 +33,17 @@ const PersonForm = (props) => {
             return 
         }
         // add into persons
-        setPersons(persons.concat(person2add))
+        const person2add = {
+            name: newName,
+            number: number
+        }
+        // upload to back-end
+        axios.post('http://localhost:3001/persons',person2add)
+            .then(response => {
+                console.log('response data:',response.data);
+                setPersons(persons.concat(response.data));
+            })
+            .catch(e => {console.log('error:',e);})
     }
 
     return (
