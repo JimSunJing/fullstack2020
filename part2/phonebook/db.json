@@ -2,18 +2,8 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "040-123456",
+      "number": "040-654321",
       "id": 1
-    },
-    {
-      "name": "Ada Lovelace",
-      "number": "39-44-5323523",
-      "id": 2
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": 3
     },
     {
       "name": "Mary Poppendieck",
@@ -21,9 +11,19 @@
       "id": 4
     },
     {
-      "name": "Jim Sun",
-      "number": "123-456-789",
-      "id": 5
+      "name": "Frank Ocean",
+      "number": "987-654-321",
+      "id": 6
+    },
+    {
+      "name": "Teddy",
+      "number": "852-741-963",
+      "id": 7
+    },
+    {
+      "name": "Frank, the creator",
+      "number": "635816273132",
+      "id": 8
     }
   ]
 }

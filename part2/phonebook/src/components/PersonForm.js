@@ -1,61 +1,30 @@
 import React from 'react';
-import axios from 'axios';
 
 const PersonForm = (props) => {
 
-    const {persons,setPersons,
-        newName,setNewName,
-        number,setNumber} = props
+    const { newName, setNewName,
+        number, setNumber, addName } = props
 
-    const handleNameOnChange = (event) =>{
+    const handleNameOnChange = (event) => {
         // console.log(event.target.value)
         setNewName(event.target.value)
     }
-    
+
     const handleNumberOnChange = (event) => {
         // console.log(event.target.value)
         setNumber(event.target.value)
-    }
-    
-    const addName = (event) => {
-        event.preventDefault()
-        // check if name already excist
-        // console.log('find:',persons.find(p => p.name === newName))
-        if (persons.find(p => p.name === newName) !== undefined){
-            console.log('find a name repeat')
-            alert(`${newName} is already added to phonebook`)
-            return 
-        }
-        // check phone number exsist
-        if (persons.find(p => p.number === number) !== undefined){
-            console.log('find a number repeat')
-            alert(`${number} is already added to phonebook`)
-            return 
-        }
-        // add into persons
-        const person2add = {
-            name: newName,
-            number: number
-        }
-        // upload to back-end
-        axios.post('http://localhost:3001/persons',person2add)
-            .then(response => {
-                console.log('response data:',response.data);
-                setPersons(persons.concat(response.data));
-            })
-            .catch(e => {console.log('error:',e);})
     }
 
     return (
         <div>
             <form onSubmit={addName}>
                 <div>
-                name: <input value={newName}
-                    onChange={handleNameOnChange}/></div>
-                <div>number: <input value={number} 
+                    name: <input value={newName}
+                        onChange={handleNameOnChange} /></div>
+                <div>number: <input value={number}
                     onChange={handleNumberOnChange} /></div>
                 <div>
-                <button type="submit">add</button>
+                    <button type="submit">add</button>
                 </div>
             </form>
         </div>
