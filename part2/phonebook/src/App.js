@@ -3,12 +3,15 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = (props) => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [number, setNumber] = useState('')
     const [searchKey, setSearchKey] = useState('')
+    const [message, setMessage] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         console.log('effect...')
@@ -26,13 +29,19 @@ const App = (props) => {
         let repeatName = persons.find(p => p.name === newName)
         if (repeatName !== undefined) {
             console.log('find a name repeat')
-            if (window.confirm(`${repeatName.name} is already added to phonebook, replace the old numberwith a new one?`)){
+            if (window.confirm(`${repeatName.name} is already added to phonebook, replace the old numberwith a new one?`)) {
                 console.log('update person number');
-                personService.updatePerson(repeatName.id,person2add)
+                personService.updatePerson(repeatName.id, person2add)
                     .then(data => {
-                        const temp = persons.map(p => p.id === data.id
-                            ? data : p)
-                        setPersons(temp)
+                        setPersons(persons.map(p => p.id === data.id
+                            ? data : p))
+                        // notify user
+                        showMessage(`Update ${repeatName.name}'s phone number success.`)
+                    })
+                    .catch(e => {
+                        console.log('error:',e)
+                        showErrorMessage(`Information of ${repeatName.name} has already been removed from server`)
+                        setPersons(persons.filter(p => p.name !== repeatName.name))
                     })
             }
             return
@@ -49,6 +58,7 @@ const App = (props) => {
             .then(data => {
                 // console.log('response data:',data);
                 setPersons(persons.concat(data));
+                showMessage(`Added ${person2add.name}`)
             })
             .catch(e => { console.log('error:', e); })
     }
@@ -58,14 +68,28 @@ const App = (props) => {
             personService.deletePerson(person.id)
                 .then(data => {
                     setPersons(persons.filter(p => p.id !== person.id))
+                    showMessage(`${person.name} has been deleted`)
                 })
                 .catch(e => console.log('error:', e))
         }
     }
 
+    const showMessage = m => {
+        setMessage(m)
+        setTimeout(()=>{setMessage(null)},5000)
+    }
+
+    const showErrorMessage = m => {
+        setErrorMessage(m)
+        setTimeout(()=>{setErrorMessage(null)},5000)
+    }
+
     return (
         <>
             <h2>Phonebook</h2>
+
+            <Notification message={message} color='green'/>
+            <Notification message={errorMessage} color='red'/>
 
             <Filter searchKey={searchKey} setSearchKey={setSearchKey} />
 
