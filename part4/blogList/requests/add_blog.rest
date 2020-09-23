@@ -2,8 +2,8 @@ post http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "can't believe i spell wrong word",
-  "author": "opla",
+  "title": "nothing at all could change my mine",
+  "author": "river",
   "url": "https://bing.com",
-  "likes": 33
+  "likes": 3300
 }
