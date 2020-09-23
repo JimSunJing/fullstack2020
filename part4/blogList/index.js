@@ -4,16 +4,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-mongoose.set('useFindAndModify', false)
-
-const blogSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
-
-const Blog = mongoose.model('Blog', blogSchema)
+const Blog = require('./modules/blog')
 
 const mongoUrl = process.env.MONGODB_URI
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
