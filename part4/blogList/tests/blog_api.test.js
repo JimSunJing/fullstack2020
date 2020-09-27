@@ -84,6 +84,36 @@ test('blog without url test', async () => {
     .expect(400)
 })
 
+test('delete a blog by its id', async () => {
+  const blogsAtStart = await helper.fetchBlogsJson()
+  const id2del = blogsAtStart[0].id
+
+  await api.delete(`/api/blogs/${id2del}`)
+    .expect(204)
+
+  const blogsAtEnd = await helper.fetchBlogsJson()
+  expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
+
+})
+
+test('update a blog by its id', async () => {
+  const blogsAtStart = await helper.fetchBlogsJson()
+  const blog = {
+    ...blogsAtStart[0],
+    likes: blogsAtStart[0].likes + 7,
+  }
+
+  await api.put(`/api/blogs/${blog.id}`)
+    .send(blog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.fetchBlogsJson()
+
+  expect(blogsAtEnd.find(b => b.id === blog.id).likes).toBe(blog.likes)
+
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
