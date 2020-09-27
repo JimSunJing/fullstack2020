@@ -14,7 +14,7 @@ const unknownEndpoint = (request, response) => {
 
 // 替代express的原生错误处理器
 const errorHandler = (err, req, res, next) => {
-  console.error(err.message)
+  console.log(err.message)
   if (err.name === 'CastError' && err.kind === 'ObjectId') {
     return res.status(400).send({ error: 'malformatted id' })
   } else if (err.name === 'ValidationError') {
