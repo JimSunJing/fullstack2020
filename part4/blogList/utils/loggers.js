@@ -1,5 +1,7 @@
 const info = (...Params) => {
-  console.log(...Params)
+  if (process.env.NODE_ENV !== 'test'){
+    console.log(...Params)
+  }
 }
 
 const warning = (...Params) => {
