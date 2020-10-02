@@ -1,10 +1,2 @@
-post http://localhost:3003/api/blogs
-Content-Type: application/json
+DELETE http://localhost:3003/api/blogs/5f75c8edfff1b848ac2cf9da
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Inl2ZXMiLCJpZCI6IjVmNzVjMDM2NDgyZTRmMzU0NGZiMmI4MyIsImlhdCI6MTYwMTU1MzE3NH0.ze7dQtnTT2vxKFb41Qt-nJbCsf0ewKfo12E-rxmb2GM
-
-{
-  "title": "ligter",
-  "author": "YVES",
-  "url": "https://bing.com",
-  "likes": 666
-}
