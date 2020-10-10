@@ -92,7 +92,7 @@ const App = () => {
     <form onSubmit={handleLogin}>
       <div>
         username
-          <input
+        <input
           type='text'
           value={username}
           name='Username'
@@ -128,7 +128,7 @@ const App = () => {
     setClassName('error')
     setTimeout(() => {
       setMessage(null)
-    }, 5000);
+    }, 5000)
   }
 
   const showMessage = (msg) => {
@@ -136,7 +136,7 @@ const App = () => {
     setClassName('notify')
     setTimeout(() => {
       setMessage(null)
-    }, 5000);
+    }, 5000)
   }
 
   return (

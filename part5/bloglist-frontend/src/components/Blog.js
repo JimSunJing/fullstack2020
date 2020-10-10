@@ -22,7 +22,7 @@ const Blog = ({
     marginBottom: 5
   }
 
-  const addLike = async event => {
+  const addLike = async () => {
     await updateBlog({
       ...blog,
       user: blog.user ? blog.user.id : '',
@@ -30,7 +30,7 @@ const Blog = ({
     })
   }
 
-  const handleDel = async event => {
+  const handleDel = async () => {
     await deleteBlog({
       id: blog.id
     })

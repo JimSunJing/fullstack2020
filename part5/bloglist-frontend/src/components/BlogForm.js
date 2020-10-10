@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react'
 
 const BlogForm = ({
   createBlog
@@ -50,7 +50,7 @@ const BlogForm = ({
         <button type='submit'>create</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default BlogForm;
+export default BlogForm
