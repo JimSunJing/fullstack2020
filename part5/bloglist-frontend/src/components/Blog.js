@@ -45,10 +45,10 @@ const Blog = ({
       <div style={showWhenVisible} className='urlAndLikes'>
         {blog.title} {blog.author}
         <button onClick={toggleVisibility}>hide</button>
-        <div>
+        <div className='url'>
           {blog.url}
         </div>
-        <div>
+        <div className='likes'>
           likes {blog.likes}
           <button onClick={addLike}>like</button>
         </div>
