@@ -59,4 +59,14 @@ describe('<Blog />', () => {
     expect(urlAndLikes.querySelector('.likes'))
       .toHaveTextContent('likes 17')
   })
+
+  test('like button react', () => {
+    const view = component.getByText('view')
+    fireEvent.click(view)
+    const like = component.getByText('like')
+    fireEvent.click(like)
+    fireEvent.click(like)
+
+    expect(updateBlog.mock.calls).toHaveLength(2)
+  })
 })
