@@ -37,12 +37,12 @@ const Blog = ({
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blogDiv'>
       <div style={hideWhenVisible}>
         {blog.title} {blog.author}
         <button onClick={toggleVisibility}>view</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className='urlAndLikes'>
         {blog.title} {blog.author}
         <button onClick={toggleVisibility}>hide</button>
         <div>
