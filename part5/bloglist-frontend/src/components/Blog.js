@@ -54,13 +54,13 @@ const Blog = ({
         </div>
         <div>
           {
-            blog.user
+            blog.user != null
               ? blog.user.username
               : ''
           }
         </div>
         {
-          blog.user && currentUser.username === blog.user.username
+          blog.user && currentUser && currentUser.username === blog.user.username
             ? <button onClick={handleDel}>delete</button>
             : <div />
         }
