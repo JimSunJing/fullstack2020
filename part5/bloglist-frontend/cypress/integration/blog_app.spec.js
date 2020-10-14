@@ -41,6 +41,38 @@ describe('Blog app', function () {
     })
   })
 
+  describe('When logged in', function () {
+    beforeEach(function () {
+      cy.login({
+        username: 'doggy',
+        password: '12345'
+      })
+    })
 
-  
+    it('A blog can be created', function () {
+      cy.contains('add blog').click()
+      cy.get('#title').type('hello cypress')
+      cy.get('#author').type('jim')
+      cy.get('#url').type('google.com')
+      cy.get('#create-blog-button').click()
+
+      cy.get('html').contains('hello cypress jim')
+    })
+
+    it.only('test on like btn', function() {
+      cy.createBlog({
+        title: 'i need a like',
+        author: 'trump',
+        url: 'google.com'
+      })
+
+      cy.contains('i need a like trump').as('thePost')
+
+      cy.get('@thePost').contains('view').click()
+      cy.get('@thePost').parent().get('#likeBtn').click()
+      cy.get('@thePost').parent().contains('likes 1')
+    })
+  })
+
+
 })

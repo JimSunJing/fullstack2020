@@ -50,7 +50,7 @@ const Blog = ({
         </div>
         <div className='likes'>
           likes {blog.likes}
-          <button onClick={addLike}>like</button>
+          <button id='likeBtn' onClick={addLike}>like</button>
         </div>
         <div>
           {
