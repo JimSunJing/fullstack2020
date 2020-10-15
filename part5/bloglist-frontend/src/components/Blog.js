@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 const Blog = ({
   blog,
+  num,
   updateBlog,
   currentUser,
   deleteBlog
@@ -37,7 +38,9 @@ const Blog = ({
   }
 
   return (
-    <div style={blogStyle} className='blogDiv'>
+    <div style={blogStyle} 
+      className='blogDiv'
+      id={`blogDiv-${num}`}>
       <div style={hideWhenVisible}>
         {blog.title} {blog.author}
         <button onClick={toggleVisibility}>view</button>
