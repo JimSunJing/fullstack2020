@@ -7,6 +7,12 @@ describe('Blog app', function () {
       password: '12345'
     }
     cy.request('POST', 'http://localhost:3003/api/users', user)
+    const user2 = {
+      name: 'pussy',
+      username: 'pussy',
+      password: '12345'
+    }
+    cy.request('POST', 'http://localhost:3003/api/users', user2)
     cy.visit('http://localhost:3000')
   })
 
@@ -59,7 +65,7 @@ describe('Blog app', function () {
       cy.get('html').contains('hello cypress jim')
     })
 
-    it.only('test on like btn', function() {
+    it('test on like btn', function() {
       cy.createBlog({
         title: 'i need a like',
         author: 'trump',
@@ -71,6 +77,42 @@ describe('Blog app', function () {
       cy.get('@thePost').contains('view').click()
       cy.get('@thePost').parent().get('#likeBtn').click()
       cy.get('@thePost').parent().contains('likes 1')
+    })
+
+    // execise 5.21
+    describe('blog test', function() {
+      beforeEach(function() {
+        cy.login({
+          username: 'pussy',
+          password: '12345'
+        })
+        cy.createBlog({
+          title: 'you are not the only',
+          author: 'not u',
+          url: 'google.com'
+        })
+        cy.login({
+          username: 'doggy',
+          password: '12345'
+        })
+        cy.createBlog({
+          title: 'you are my only',
+          author: 'not u',
+          url: 'google.com'
+        })
+      })
+
+      it('user can delele their own post', function() {
+        cy.contains('you are my only').as('thePost')
+        cy.get('@thePost').contains('view').click()
+        cy.get('@thePost').parent().get('#delBtn').click()
+        cy.get('html').should('not.contain', 'you are my only')
+      })
+      it.only('user can not delele others post', function() {
+        cy.contains('you are not the only').as('thePost')
+        cy.get('@thePost').contains('view').click()
+        cy.get('@thePost').should('not.contain', '#delBtn')
+      })
     })
   })
 

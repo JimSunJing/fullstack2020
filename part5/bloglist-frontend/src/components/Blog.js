@@ -61,7 +61,9 @@ const Blog = ({
         </div>
         {
           blog.user && currentUser && currentUser.username === blog.user.username
-            ? <button onClick={handleDel}>delete</button>
+            ? <button
+              id='delBtn' 
+              onClick={handleDel}>delete</button>
             : <div />
         }
       </div>
