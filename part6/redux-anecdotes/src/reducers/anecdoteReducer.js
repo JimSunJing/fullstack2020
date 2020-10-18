@@ -38,6 +38,7 @@ const reducer = (state = initialState, action) => {
 
 export default reducer
 
+// exercise 6.6
 export const genVote = id => ({
   type: 'VOTE',
   data: {
