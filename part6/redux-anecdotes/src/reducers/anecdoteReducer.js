@@ -30,6 +30,8 @@ const reducer = (state = initialState, action) => {
         votes: toVote.votes + 1
       }
       return [...state.filter(a => a.id !== action.data.id), toUpdate]
+    case ('ADD'):
+      return [...state, action.data]
     default: return state
   }
 }
@@ -41,4 +43,9 @@ export const genVote = id => ({
   data: {
     id
   }
+})
+
+export const genAnecdote = content => ({
+  type: 'ADD',
+  data: asObject(content)
 })
