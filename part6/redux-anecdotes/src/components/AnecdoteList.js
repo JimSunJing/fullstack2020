@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { genVote } from '../reducers/anecdoteReducer';
+import { notificationChange } from '../reducers/notificationReducer';
 
 const AnecdoteList = () => {
   
@@ -10,6 +11,10 @@ const AnecdoteList = () => {
   const vote = (id) => {
     console.log('vote', id)
     dispatch(genVote(id))
+    dispatch(notificationChange(`you voted "${anecdotes.find(a => a.id === id).content}"`))
+    setTimeout(() => {
+      dispatch(notificationChange(''))
+    },5000)
   }
   return (
     <div>

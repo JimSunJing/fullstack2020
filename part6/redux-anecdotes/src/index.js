@@ -8,7 +8,7 @@ import App from './App'
 import anecdoteReducer from './reducers/anecdoteReducer'
 import notificationReducer from './reducers/notificationReducer'
 
-import { notificationChange } from './reducers/notificationReducer'
+// import { notificationChange } from './reducers/notificationReducer'
 
 const reducer = combineReducers({
   anecdotes: anecdoteReducer,
@@ -28,5 +28,5 @@ ReactDOM.render(
 )
 
 
-store.subscribe(() => console.log(store.getState()))
-store.dispatch(notificationChange('notification from index.js'))
+// store.subscribe(() => console.log(store.getState()))
+// store.dispatch(notificationChange('notification from index.js'))
