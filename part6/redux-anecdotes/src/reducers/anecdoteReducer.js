@@ -55,10 +55,15 @@ export const genVote = id => ({
 //   data: asObject(content)
 // })
 
-export const genAnecdote = data => ({
-  type: 'ADD',
-  data
-})
+export const genAnecdote = (content) => {
+  return async dispatch => {
+    const data = await anecodoteService.createNew(content)
+    return dispatch({
+      type: 'ADD',
+      data
+    })
+  }
+}
 
 export const initAnecodotes = () => {
   return async dispatch => {
