@@ -48,9 +48,14 @@ export const genVote = id => ({
   }
 })
 
-export const genAnecdote = content => ({
+// export const genAnecdote = content => ({
+//   type: 'ADD',
+//   data: asObject(content)
+// })
+
+export const genAnecdote = data => ({
   type: 'ADD',
-  data: asObject(content)
+  data
 })
 
 export const initAnecodotes = data => ({
