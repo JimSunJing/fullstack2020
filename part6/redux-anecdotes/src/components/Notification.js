@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 const Notification = () => {
   const notification = useSelector(state => state.notification)
 
-  if (notification === ''){
+  if (!notification || notification === ''){
     return null
   }
   const style = {
