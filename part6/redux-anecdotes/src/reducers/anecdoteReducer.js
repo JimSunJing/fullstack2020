@@ -1,3 +1,5 @@
+import anecodoteService from '../services/anecodoteService'
+
 // const anecdotesAtStart = [
 //   'If it hurts, do it more often',
 //   'Adding manpower to a late software project makes it later!',
@@ -7,15 +9,15 @@
 //   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 // ]
 
-const getId = () => (100000 * Math.random()).toFixed(0)
+// const getId = () => (100000 * Math.random()).toFixed(0)
 
-const asObject = (anecdote) => {
-  return {
-    content: anecdote,
-    id: getId(),
-    votes: 0
-  }
-}
+// const asObject = (anecdote) => {
+//   return {
+//     content: anecdote,
+//     id: getId(),
+//     votes: 0
+//   }
+// }
 
 // const initialState = anecdotesAtStart.map(asObject)
 
@@ -58,7 +60,12 @@ export const genAnecdote = data => ({
   data
 })
 
-export const initAnecodotes = data => ({
-  type: 'INIT',
-  data
-})
+export const initAnecodotes = () => {
+  return async dispatch => {
+    const data = await anecodoteService.getAll()
+    return dispatch({
+      type: 'INIT',
+      data
+    })
+  }
+}
