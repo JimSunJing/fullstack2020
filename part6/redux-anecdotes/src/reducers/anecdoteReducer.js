@@ -26,12 +26,7 @@ const reducer = (state = [], action) => {
   console.log('action', action)
   switch (action.type){
     case ('VOTE'):
-      const toVote = state.find(anecdote => anecdote.id === action.data.id)
-      const toUpdate = {
-        ...toVote,
-        votes: toVote.votes + 1
-      }
-      return [...state.filter(a => a.id !== action.data.id), toUpdate]
+      return [...state.filter(a => a.id !== action.data.id), action.data]
     case ('ADD'):
       return [...state, action.data]
     case ('INIT'):
@@ -43,12 +38,20 @@ const reducer = (state = [], action) => {
 export default reducer
 
 // exercise 6.6
-export const genVote = id => ({
-  type: 'VOTE',
-  data: {
-    id
+export const genVote = id => {
+  return async dispatch => {
+    const old =  await anecodoteService.getById(id)
+    const newObj = {
+      ...old,
+      votes: old.votes + 1
+    }
+    const data =  await anecodoteService.update(newObj)
+    dispatch({
+      type: 'VOTE',
+      data: data
+    })
   }
-})
+}
 
 // export const genAnecdote = content => ({
 //   type: 'ADD',
