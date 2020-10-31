@@ -16,13 +16,17 @@ export const notificationChange = notification => {
   }
 }
 
+let timeOutId
+
 export const pushNotification = (notification, time) => {
   return async dispatch => {
+    if (timeOutId !== undefined)
+      clearTimeout(timeOutId)
     dispatch({
       type: 'SET_NOTICE',
       notification
     })
-    setTimeout(() => {
+    timeOutId = setTimeout(() => {
       dispatch({
         type: 'CLEAR'
       })

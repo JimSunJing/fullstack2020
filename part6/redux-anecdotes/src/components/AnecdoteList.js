@@ -21,7 +21,7 @@ const AnecdoteList = (props) => {
   const vote = (id) => {
     console.log('vote', id)
     props.genVote(id)
-    props.pushNotification(`you voted "${props.anecdotes.find(a => a.id === id).content}"`, 10)
+    props.pushNotification(`you voted "${props.anecdotes.find(a => a.id === id).content}"`, 5)
   }
   return (
     <div>
