@@ -22,8 +22,8 @@ import anecodoteService from '../services/anecodoteService'
 // const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = [], action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
+  // console.log('state now: ', state)
+  // console.log('action', action)
   switch (action.type){
     case ('VOTE'):
       return [...state.filter(a => a.id !== action.data.id), action.data]
