@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-  Switch, Route, Link, 
+  Switch, Route, Link,
   useRouteMatch, useHistory
 } from "react-router-dom"
 import { useField } from './hooks'
@@ -22,12 +22,12 @@ const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => 
-      <li key={anecdote.id} >
-        <Link to={`/anecdote/${anecdote.id}`}>
-          {anecdote.content}
-        </Link>
-      </li>)}
+      {anecdotes.map(anecdote =>
+        <li key={anecdote.id} >
+          <Link to={`/anecdote/${anecdote.id}`}>
+            {anecdote.content}
+          </Link>
+        </li>)}
     </ul>
   </div>
 )
@@ -47,8 +47,8 @@ const About = () => (
     <p>According to Wikipedia:</p>
 
     <em>An anecdote is a brief, revealing account of an individual person or an incident.
-      Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
-      such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
+    Occasionally humorous, anecdotes differ from jokes because their primary purpose is not simply to provoke laughter but to reveal a truth more general than the brief tale itself,
+    such as to characterize a person by delineating a specific quirk or trait, to communicate an abstract idea about a person, place, or thing through the concrete details of a short narrative.
       An anecdote is "a story with a point."</em>
 
     <p>Software engineering is full of excellent anecdotes, at this app you can find the best and add more.</p>
@@ -87,7 +87,12 @@ const CreateNew = (props) => {
     author.reset()
     info.reset()
   }
-  
+
+  const removeProp = (field) => {
+    const { reset, ...rest } = field
+    return rest
+  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
@@ -95,18 +100,15 @@ const CreateNew = (props) => {
         onReset={handleReset}>
         <div>
           content
-          {/* <input name='content' value={content} onChange={(e) => setContent(e.target.value)} /> */}
-          <input name='content' {...content} />
+          <input name='content' {...removeProp(content)} />
         </div>
         <div>
           author
-          {/* <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} /> */}
-          <input name='author' {...author} />
+          <input name='author' {...removeProp(author)} />
         </div>
         <div>
           url for more info
-          {/* <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} /> */}
-          <input name='info' {...info} />
+          <input name='info' {...removeProp(info)} />
         </div>
         <button type='submit'>create</button>
         <button type='reset'>reset</button>
