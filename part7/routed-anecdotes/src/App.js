@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
   BrowserRouter as Router,
   Switch, Route, Link
-} from 'react-route-dom'
+} from "react-router-dom"
 
 const Menu = () => {
   const padding = {
@@ -10,9 +10,9 @@ const Menu = () => {
   }
   return (
     <div>
-      <Link href='/' style={padding}>anecdotes</Link>
-      <Link href='/create' style={padding}>create new</Link>
-      <Link href='/about' style={padding}>about</Link>
+      <Link to='/' style={padding}>anecdotes</Link>
+      <Link to='/create' style={padding}>create new</Link>
+      <Link to='/about' style={padding}>about</Link>
     </div>
   )
 }
@@ -130,17 +130,17 @@ const App = () => {
     <Router>
       <h1>Software anecdotes</h1>
       <Menu />
-        <Switch>
-          <Route path="/">
-            <AnecdoteList anecdotes={anecdotes} />
-	  </Route>
-          <Route path="/about">
-            <About />
-	  </Route>
-          <Route path="/create">
-            <CreateNew addNew={addNew} />
-	  </Route>
-	</Switch>
+      <Switch>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/create">
+          <CreateNew addNew={addNew} />
+        </Route>
+        <Route path="/">
+          <AnecdoteList anecdotes={anecdotes} />
+        </Route>
+      </Switch>
       <Footer />
     </Router>
   )
